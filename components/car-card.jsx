@@ -129,7 +129,12 @@ const CarCard = ({ car }) => {
           <Button
             className="flex-1"
             onClick={() => {
-              router.push(`/cars/${car.id}`);
+            if (!isSignedIn) {
+              toast.error("Please sign in to view car details");
+              router.push("/sign-in");
+              return;
+            }
+            router.push(`/cars/${car.id}`);
             }}
           >
             View Car
@@ -141,3 +146,4 @@ const CarCard = ({ car }) => {
 };
 
 export default CarCard
+
